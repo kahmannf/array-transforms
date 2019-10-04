@@ -12,5 +12,10 @@
   "bugs": {
     "url": "https://github.com/kahmannf/iterable-transforms/issues"
   },
-  "homepage": "https://github.com/kahmannf/iterable-transforms#readme"
+  "homepage": "https://github.com/kahmannf/iterable-transforms#readme",
+  "keywords": [
+    "iterables",
+    "arrays",
+    "typescript"
+  ]
 }
