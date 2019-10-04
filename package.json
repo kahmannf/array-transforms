@@ -1,0 +1,9 @@
+{
+  "name": "array-transforms",
+  "version": "1.0.0",
+  "main": "dist/index.ts",
+  "repository": "https://github.com/kahmannf/array-transforms.git",
+  "author": "Felix Kahmann <felix@kahmann.com>",
+  "license": "MIT",
+  "private": true
+}
