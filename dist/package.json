@@ -1,10 +1,16 @@
 {
-  "name": "@kahmannf/array-transforms",
+  "name": "@kahmannf/iterable-transforms",
   "version": "0.0.1",
-  "description": "Javascript array helper funtions inspiered by C#-Linq API",
+  "description": "Typescript helper functions to manipulatio iterables inspiered by C#-Linq API",
   "main": "index.js",
-  "repository": "https://github.com/kahmannf/array-transforms.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kahmannf/iterable-transforms.git"
+  },
   "author": "Felix Kahmann <felix@kahmann.de>",
-  "license": "MIT",
-  "private": false
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kahmannf/iterable-transforms/issues"
+  },
+  "homepage": "https://github.com/kahmannf/iterable-transforms#readme"
 }
