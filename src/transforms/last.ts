@@ -1,4 +1,6 @@
-export function last<T>(source: Iterable<T>, predicate?: (item: T) => boolean): T | undefined {
+import { Predicate } from "../predicate";
+
+export function last<T>(source: Iterable<T>, predicate?: Predicate<T>): T | undefined {
   let last: T | undefined = undefined
 
   predicate = predicate || (x => true);

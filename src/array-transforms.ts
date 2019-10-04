@@ -1,5 +1,7 @@
 import { map, distinct, flat, first, last, reverse, reduce } from './transforms'
 import { concat } from './transforms/concat';
+import { Predicate } from './predicate';
+import { count } from './transforms/count';
 
 export class ArrayTransform<T> implements Iterable<T> {
 
@@ -7,6 +9,10 @@ export class ArrayTransform<T> implements Iterable<T> {
 
   concat(other: Iterable<T>): ArrayTransform<T> {
     return new ArrayTransform(concat(this.source, other))
+  }
+
+  count(predicate?: Predicate<T>): number {
+    return count(this.source, predicate)
   }
 
   distinct(): ArrayTransform<T>;

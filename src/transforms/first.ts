@@ -1,4 +1,6 @@
-export function first<T>(source: Iterable<T>, predicate?: (item: T) => boolean): T | undefined {
+import { Predicate } from "../predicate";
+
+export function first<T>(source: Iterable<T>, predicate?: Predicate<T>): T | undefined {
   predicate = predicate || (x => true);
 
   const iterator = source[Symbol.iterator]();

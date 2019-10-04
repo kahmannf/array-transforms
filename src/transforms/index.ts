@@ -1,3 +1,5 @@
+export * from './concat'
+export * from './count'
 export * from './distinct'
 export * from './first'
 export * from './flat'
