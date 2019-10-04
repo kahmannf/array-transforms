@@ -1,4 +1,4 @@
-import { map, distinct, flat, first, last } from './transforms'
+import { map, distinct, flat, first, last, reverse } from './transforms'
 
 export class ArrayTransform<T> implements Iterable<T> {
 
@@ -26,6 +26,10 @@ export class ArrayTransform<T> implements Iterable<T> {
 
   map<U>(selector: (items: T) => U): ArrayTransform<U> {
     return new ArrayTransform(map(this.source, selector))
+  }
+
+  reverse(): ArrayTransform<T> {
+    return new ArrayTransform(reverse(this.source));
   }
 
   [Symbol.iterator](): IterableIterator<T> {
