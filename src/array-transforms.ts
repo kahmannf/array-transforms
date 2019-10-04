@@ -1,7 +1,8 @@
 import { map, distinct, flat, first, last, reverse, reduce } from './transforms'
 import { concat } from './transforms/concat';
-import { Predicate, Selector } from './types';
+import { Predicate, Selector, EqualityFn, Grouping } from './types';
 import { count } from './transforms/count';
+import { groupBy } from './transforms/group-by';
 
 export class ArrayTransform<T> implements Iterable<T> {
 
@@ -29,6 +30,12 @@ export class ArrayTransform<T> implements Iterable<T> {
 
   flatMap<U>(selector: Selector<T, Iterable<U>>): ArrayTransform<U> {
     return new ArrayTransform(flat(map(this.source, selector)))
+  }
+
+  groupBy<TKey>(keySelector: Selector<T, TKey>, equals?: EqualityFn<TKey>): ArrayTransform<Grouping<TKey, T>>
+  groupBy<TKey, TValue>(keySelector: Selector<T, TKey>, equals?: EqualityFn<TKey>, valueSelector?: Selector<T, TValue>): ArrayTransform<Grouping<TKey, TValue>>
+  groupBy<TKey, TValue>(keySelector: Selector<T, TKey>, equals?: EqualityFn<TKey>, valueSelector?: Selector<T, TValue|T>): ArrayTransform<Grouping<TKey, T|TValue>> {
+    return new ArrayTransform(groupBy(this.source, keySelector, equals, valueSelector))
   }
 
   last(predicate?: Predicate<T>): T | undefined {
