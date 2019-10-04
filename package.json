@@ -6,6 +6,9 @@
   "author": "Felix Kahmann <felix@kahmann.de>",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "build-and-publish": "tsc && node fix-carriage-returns dist && npm publish dist"
+  },
   "devDependencies": {
     "typescript": "^3.6.3"
   }
