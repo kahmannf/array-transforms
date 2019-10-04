@@ -1,4 +1,4 @@
-import { map, distinct, flat, first, last, reverse } from './transforms'
+import { map, distinct, flat, first, last, reverse, reduce } from './transforms'
 
 export class ArrayTransform<T> implements Iterable<T> {
 
@@ -26,6 +26,12 @@ export class ArrayTransform<T> implements Iterable<T> {
 
   map<U>(selector: (items: T) => U): ArrayTransform<U> {
     return new ArrayTransform(map(this.source, selector))
+  }
+  
+  reduce<T>(source: Iterable<T>, reducer: (pv: T, cv: T, initialValue?: T) => T): T;
+  reduce<T, U>(source: Iterable<T>, reducer: (pv: U, cv: T) => U, initialValue: U): U
+  reduce<T, U>(source: Iterable<T>, reducer: (pv: T|U, cv: T) => T|U, initialValue?: U): T|U {
+    return reduce(source, <any>reducer, <any>initialValue);
   }
 
   reverse(): ArrayTransform<T> {
