@@ -1,4 +1,4 @@
-import { Selector } from "../selector";
+import { Selector } from "../types";
 
 export function distinct<T>(source: Iterable<T>): Iterable<T>
 export function distinct<T, U>(source: Iterable<T>, selector: Selector<T, U>): Iterable<U>

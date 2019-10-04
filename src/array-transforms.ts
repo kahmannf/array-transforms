@@ -1,6 +1,6 @@
 import { map, distinct, flat, first, last, reverse, reduce } from './transforms'
 import { concat } from './transforms/concat';
-import { Predicate } from './predicate';
+import { Predicate, Selector } from './types';
 import { count } from './transforms/count';
 
 export class ArrayTransform<T> implements Iterable<T> {
@@ -16,26 +16,26 @@ export class ArrayTransform<T> implements Iterable<T> {
   }
 
   distinct(): ArrayTransform<T>;
-  distinct<U>(selector: (item: T) => U): ArrayTransform<U>;
-  distinct<U>(selector?: (item: T) => U): ArrayTransform<T> | ArrayTransform<U> {
+  distinct<U>(selector: Selector<T, U>): ArrayTransform<U>;
+  distinct<U>(selector?: Selector<T, U>): ArrayTransform<T|U>  {
     return selector
     ? new ArrayTransform(distinct(this.source, selector))
     : new ArrayTransform(distinct(this.source))
   }
 
-  first(predicate?: (item: T) => boolean): T | undefined {
+  first(predicate?: Predicate<T>): T | undefined {
     return first(this.source, predicate);
   }
 
-  flatMap<U>(selector: (x: T) => Iterable<U>): ArrayTransform<U> {
+  flatMap<U>(selector: Selector<T, Iterable<U>>): ArrayTransform<U> {
     return new ArrayTransform(flat(map(this.source, selector)))
   }
 
-  last(predicate?: (item: T) => boolean): T | undefined {
+  last(predicate?: Predicate<T>): T | undefined {
     return last(this.source, predicate)
   }
 
-  map<U>(selector: (items: T) => U): ArrayTransform<U> {
+  map<U>(selector: Selector<T, U>): ArrayTransform<U> {
     return new ArrayTransform(map(this.source, selector))
   }
   

@@ -1,4 +1,4 @@
-import { Predicate } from "../predicate";
+import { Predicate } from "../types";
 
 export function first<T>(source: Iterable<T>, predicate?: Predicate<T>): T | undefined {
   predicate = predicate || (x => true);

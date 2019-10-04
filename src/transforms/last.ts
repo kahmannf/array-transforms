@@ -1,4 +1,4 @@
-import { Predicate } from "../predicate";
+import { Predicate } from "../types";
 
 export function last<T>(source: Iterable<T>, predicate?: Predicate<T>): T | undefined {
   let last: T | undefined = undefined
