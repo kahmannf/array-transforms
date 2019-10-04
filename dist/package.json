@@ -1,5 +1,5 @@
 {
-  "name": "array-transforms",
+  "name": "@kahmannf/array-transforms",
   "version": "0.0.1",
   "description": "Javascript array helper funtions inspiered by C#-Linq API",
   "main": "index.js",

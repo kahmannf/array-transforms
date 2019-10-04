@@ -1,6 +1,6 @@
 import { ArrayTransform } from "./array-transforms";
 
-function create<T>(source: IterableIterator<T>) {
+function create<T>(source: Iterable<T>) {
   return new ArrayTransform(source)
 }
 
