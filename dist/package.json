@@ -1,12 +1,10 @@
 {
   "name": "array-transforms",
-  "version": "1.0.0",
-  "main": "dist/index.ts",
+  "version": "0.0.1",
+  "description": "Javascript array helper funtions inspiered by C#-Linq API",
+  "main": "index.js",
   "repository": "https://github.com/kahmannf/array-transforms.git",
   "author": "Felix Kahmann <felix@kahmann.de>",
   "license": "MIT",
-  "private": true,
-  "devDependencies": {
-    "typescript": "^3.6.3"
-  }
+  "private": false
 }
