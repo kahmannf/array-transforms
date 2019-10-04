@@ -1,8 +1,13 @@
 import { map, distinct, flat, first, last, reverse, reduce } from './transforms'
+import { concat } from './transforms/concat';
 
 export class ArrayTransform<T> implements Iterable<T> {
 
   constructor(private source: Iterable<T>) {}
+
+  concat(other: Iterable<T>): ArrayTransform<T> {
+    return new ArrayTransform(concat(this.source, other))
+  }
 
   distinct(): ArrayTransform<T>;
   distinct<U>(selector: (item: T) => U): ArrayTransform<U>;
