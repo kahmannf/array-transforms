@@ -1,3 +1,5 @@
 export * from './distinct'
+export * from './first'
 export * from './flat'
+export * from './last'
 export * from './map'

@@ -1,4 +1,4 @@
-import { map, distinct, flat } from './transforms'
+import { map, distinct, flat, first, last } from './transforms'
 
 export class ArrayTransform<T> implements Iterable<T> {
 
@@ -12,8 +12,16 @@ export class ArrayTransform<T> implements Iterable<T> {
     : new ArrayTransform(distinct(this.source))
   }
 
+  first(): T | undefined {
+    return first(this.source);
+  }
+
   flatMap<U>(selector: (x: T) => Iterable<U>): ArrayTransform<U> {
     return new ArrayTransform(flat(map(this.source, selector)))
+  }
+
+  last(): T | undefined {
+    return last(this.source)
   }
 
   map<U>(selector: (items: T) => U): ArrayTransform<U> {
