@@ -12,7 +12,9 @@ import {
   sort,
   thenSort,
   skip,
-  skipWhile
+  skipWhile,
+  take,
+  takeWhile
 } from './transforms'
 import {
   Predicate,
@@ -90,6 +92,14 @@ export class IterableTransform<T> implements Iterable<T> {
     comparer?: Comparer<TKey>
   ): SortedIterableTransform<T> {
     return new SortedIterableTransform(sort(this.source, keySelector, direction, comparer))
+  }
+
+  take(amount: number): IterableTransform<T> {
+    return new IterableTransform(take(this.source, amount))
+  }
+  
+  takeWhile(predicate: Predicate<T>): IterableTransform<T> {
+    return new IterableTransform(takeWhile(this.source, predicate))
   }
 
   [Symbol.iterator](): IterableIterator<T> {
