@@ -1,9 +1,26 @@
-import { map, distinct, flat, first, last, reverse, reduce } from './transforms'
-import { concat } from './transforms/concat';
-import { Predicate, Selector, EqualityFn, Grouping, Comparer, SortedIterable, SortDirection } from './types';
-import { count } from './transforms/count';
-import { groupBy } from './transforms/group-by';
-import { sort, thenSort } from './transforms/sorting';
+import { 
+  map,
+  distinct,
+  flat,
+  first,
+  last,
+  reverse,
+  reduce,
+  concat,
+  count,
+  groupBy,
+  sort,
+  thenSort
+} from './transforms'
+import {
+  Predicate,
+  Selector,
+  EqualityFn,
+  Grouping,
+  Comparer,
+  SortedIterable,
+  SortDirection
+} from './types';
 
 export class ArrayTransform<T> implements Iterable<T> {
 
