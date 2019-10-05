@@ -90,7 +90,7 @@ distinct(array3)
 ```
 
 ### filter
-Returns a iterable that only contains items which match the predicate. Similar to Array.prototype.filter.
+Returns a iterable that only contains items which match the predicate. Similar to `Array.prototype.filter`.
 ```typescript
 function filter<T>(source: Iterable<T>, predicate: Predicate<T>): Iterable<T>
 ```
@@ -136,13 +136,13 @@ function last<T>(source: Iterable<T>, predicate?: Predicate<T>): T | undefined
 ```
 
 ### map
-Maps all the items of the iterable to a new value. Similar to Array.prototype.map.
+Maps all the items of the iterable to a new value. Similar to `Array.prototype.map`.
 ```typescript
 function map<T, U>(source: Iterable<T>, selector: Selector<T, U>): Iterable<U>
 ```
 
 ### reduce
-Reduces the iterable to a single value. Similar to Array.prototype.reduce
+Reduces the iterable to a single value. Similar to `Array.prototype.reduce`
 ```typescript
 function reduce<T>(source: Iterable<T>, reducer: (pv: T, cv: T) => T, initialValue?: T): T
 function reduce<T, U>(source: Iterable<T>, reducer: (pv: U, cv: T) => U, initialValue: U): U
