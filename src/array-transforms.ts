@@ -1,8 +1,9 @@
 import { map, distinct, flat, first, last, reverse, reduce } from './transforms'
 import { concat } from './transforms/concat';
-import { Predicate, Selector, EqualityFn, Grouping } from './types';
+import { Predicate, Selector, EqualityFn, Grouping, Comparer, SortedIterable, SortDirection } from './types';
 import { count } from './transforms/count';
 import { groupBy } from './transforms/group-by';
+import { sort, thenSort } from './transforms/sorting';
 
 export class ArrayTransform<T> implements Iterable<T> {
 
@@ -56,10 +57,33 @@ export class ArrayTransform<T> implements Iterable<T> {
     return new ArrayTransform(reverse(this.source));
   }
 
+  sort<TKey>(
+    keySelector: Selector<T, TKey>,
+    direction: SortDirection = 'asc',
+    comparer?: Comparer<TKey>
+  ): SortedArrayTransform<T> {
+    return new SortedArrayTransform(sort(this.source, keySelector, direction, comparer))
+  }
+
   [Symbol.iterator](): IterableIterator<T> {
     const _this = this
     return function*() {
       for(const item of _this.source) yield item
     }();
+  }
+}
+
+export class SortedArrayTransform<T> extends ArrayTransform<T> {
+  
+  constructor(private sortedSource: SortedIterable<T>) {
+    super(sortedSource)
+  }
+
+  thenSort<TKey>(
+    keySelector: Selector<T, TKey>,
+    direction: SortDirection = 'asc',
+    comparer?: Comparer<TKey>
+  ): SortedArrayTransform<T> {
+    return new SortedArrayTransform(thenSort(this.sortedSource, keySelector, direction, comparer))
   }
 }
