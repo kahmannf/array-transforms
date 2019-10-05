@@ -110,13 +110,13 @@ function flat<T>(source: Iterable<Iterable<T>>): Iterable<T>
 ### groupBy
 Groups an items of an iterable by a key. Returns an array of groupings.
 ```typescript
-export function groupBy<T, TKey>(
+function groupBy<T, TKey>(
   source: Iterable<T>,
   keySelector: Selector<T, TKey>,
   equals?: EqualityFn<TKey>
 ): Grouping<TKey, T>[]
 
-export function groupBy<T, TKey, TValue>(
+function groupBy<T, TKey, TValue>(
   source: Iterable<T>,
   keySelector: Selector<T, TKey>,
   equals?: EqualityFn<TKey>,
