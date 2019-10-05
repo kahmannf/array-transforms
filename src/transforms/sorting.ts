@@ -128,7 +128,7 @@ class SortedIterableImpl<T, TKey> implements SortedIterable<T> {
     return this.parent ? this.parent.getSorter(thisSorter) : thisSorter
   }
   
-  [Symbol.iterator](): Iterator<T, any, undefined> {
+  [Symbol.iterator](): Iterator<T> {
 
     const source = this.source;
     const _this: SortedIterableImpl<T, TKey> = this

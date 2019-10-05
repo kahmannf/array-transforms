@@ -1,6 +1,7 @@
 export * from './concat'
 export * from './count'
 export * from './distinct'
+export * from './filter'
 export * from './first'
 export * from './flat'
 export * from './group-by'

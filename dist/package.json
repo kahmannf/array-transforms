@@ -1,6 +1,6 @@
 {
   "name": "@kahmannf/iterable-transforms",
-  "version": "0.0.2",
+  "version": "1.0.1",
   "description": "Typescript helper functions to manipulatio iterables inspiered by C#-Linq API",
   "main": "index.js",
   "repository": {
@@ -16,6 +16,7 @@
   "keywords": [
     "iterables",
     "arrays",
-    "typescript"
+    "typescript",
+    "linq"
   ]
 }

@@ -14,7 +14,8 @@ import {
   skip,
   skipWhile,
   take,
-  takeWhile
+  takeWhile,
+  filter
 } from './transforms'
 import {
   Predicate,
@@ -44,6 +45,10 @@ export class IterableTransform<T> implements Iterable<T> {
     return selector
     ? new IterableTransform(distinct(this.source, selector))
     : new IterableTransform(distinct(this.source))
+  }
+
+  filter(predicate: Predicate<T>): IterableTransform<T> {
+    return new IterableTransform(filter(this.source, predicate))
   }
 
   first(predicate?: Predicate<T>): T | undefined {
