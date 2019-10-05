@@ -1,5 +1,19 @@
 # Iterable Transforms
 
+[![npm version](https://badge.fury.io/js/%40kahmannf%2Fiterable-transforms.svg)](https://badge.fury.io/js/%40kahmannf%2Fiterable-transforms)
+
+## Installation 
+
+yarn:
+```
+yarn add @kahmannf/iterable-transforms
+```
+npm:
+```
+npm install @kahmannf/iterable-transforms
+```
+
+
 Typescript/Javascript library for manipulation of Iterables. Inspiered by the C#-Linq API
 
 Available transformations:
