@@ -1,7 +1,7 @@
-import { ArrayTransform } from "./array-transforms";
+import { IterableTransform } from "./array-transforms";
 
 function create<T>(source: Iterable<T>) {
-  return new ArrayTransform(source)
+  return new IterableTransform(source)
 }
 
 export default create

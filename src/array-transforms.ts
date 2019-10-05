@@ -10,7 +10,9 @@ import {
   count,
   groupBy,
   sort,
-  thenSort
+  thenSort,
+  skip,
+  skipWhile
 } from './transforms'
 import {
   Predicate,
@@ -22,46 +24,46 @@ import {
   SortDirection
 } from './types';
 
-export class ArrayTransform<T> implements Iterable<T> {
+export class IterableTransform<T> implements Iterable<T> {
 
   constructor(private source: Iterable<T>) {}
 
-  concat(other: Iterable<T>): ArrayTransform<T> {
-    return new ArrayTransform(concat(this.source, other))
+  concat(other: Iterable<T>): IterableTransform<T> {
+    return new IterableTransform(concat(this.source, other))
   }
 
   count(predicate?: Predicate<T>): number {
     return count(this.source, predicate)
   }
 
-  distinct(): ArrayTransform<T>;
-  distinct<U>(selector: Selector<T, U>): ArrayTransform<U>;
-  distinct<U>(selector?: Selector<T, U>): ArrayTransform<T|U>  {
+  distinct(): IterableTransform<T>;
+  distinct<U>(selector: Selector<T, U>): IterableTransform<U>;
+  distinct<U>(selector?: Selector<T, U>): IterableTransform<T|U>  {
     return selector
-    ? new ArrayTransform(distinct(this.source, selector))
-    : new ArrayTransform(distinct(this.source))
+    ? new IterableTransform(distinct(this.source, selector))
+    : new IterableTransform(distinct(this.source))
   }
 
   first(predicate?: Predicate<T>): T | undefined {
     return first(this.source, predicate);
   }
 
-  flatMap<U>(selector: Selector<T, Iterable<U>>): ArrayTransform<U> {
-    return new ArrayTransform(flat(map(this.source, selector)))
+  flatMap<U>(selector: Selector<T, Iterable<U>>): IterableTransform<U> {
+    return new IterableTransform(flat(map(this.source, selector)))
   }
 
-  groupBy<TKey>(keySelector: Selector<T, TKey>, equals?: EqualityFn<TKey>): ArrayTransform<Grouping<TKey, T>>
-  groupBy<TKey, TValue>(keySelector: Selector<T, TKey>, equals?: EqualityFn<TKey>, valueSelector?: Selector<T, TValue>): ArrayTransform<Grouping<TKey, TValue>>
-  groupBy<TKey, TValue>(keySelector: Selector<T, TKey>, equals?: EqualityFn<TKey>, valueSelector?: Selector<T, TValue|T>): ArrayTransform<Grouping<TKey, T|TValue>> {
-    return new ArrayTransform(groupBy(this.source, keySelector, equals, valueSelector))
+  groupBy<TKey>(keySelector: Selector<T, TKey>, equals?: EqualityFn<TKey>): IterableTransform<Grouping<TKey, T>>
+  groupBy<TKey, TValue>(keySelector: Selector<T, TKey>, equals?: EqualityFn<TKey>, valueSelector?: Selector<T, TValue>): IterableTransform<Grouping<TKey, TValue>>
+  groupBy<TKey, TValue>(keySelector: Selector<T, TKey>, equals?: EqualityFn<TKey>, valueSelector?: Selector<T, TValue|T>): IterableTransform<Grouping<TKey, T|TValue>> {
+    return new IterableTransform(groupBy(this.source, keySelector, equals, valueSelector))
   }
 
   last(predicate?: Predicate<T>): T | undefined {
     return last(this.source, predicate)
   }
 
-  map<U>(selector: Selector<T, U>): ArrayTransform<U> {
-    return new ArrayTransform(map(this.source, selector))
+  map<U>(selector: Selector<T, U>): IterableTransform<U> {
+    return new IterableTransform(map(this.source, selector))
   }
   
   reduce<T>(source: Iterable<T>, reducer: (pv: T, cv: T, initialValue?: T) => T): T;
@@ -70,16 +72,24 @@ export class ArrayTransform<T> implements Iterable<T> {
     return reduce(source, <any>reducer, <any>initialValue);
   }
 
-  reverse(): ArrayTransform<T> {
-    return new ArrayTransform(reverse(this.source));
+  reverse(): IterableTransform<T> {
+    return new IterableTransform(reverse(this.source));
+  }
+
+  skip(amount: number): IterableTransform<T> {
+    return new IterableTransform(skip(this.source, amount))
+  }
+
+  skipWhile(predicate: Predicate<T>): IterableTransform<T> {
+    return new IterableTransform(skipWhile(this.source, predicate))
   }
 
   sort<TKey>(
     keySelector: Selector<T, TKey>,
     direction: SortDirection = 'asc',
     comparer?: Comparer<TKey>
-  ): SortedArrayTransform<T> {
-    return new SortedArrayTransform(sort(this.source, keySelector, direction, comparer))
+  ): SortedIterableTransform<T> {
+    return new SortedIterableTransform(sort(this.source, keySelector, direction, comparer))
   }
 
   [Symbol.iterator](): IterableIterator<T> {
@@ -90,7 +100,7 @@ export class ArrayTransform<T> implements Iterable<T> {
   }
 }
 
-export class SortedArrayTransform<T> extends ArrayTransform<T> {
+export class SortedIterableTransform<T> extends IterableTransform<T> {
   
   constructor(private sortedSource: SortedIterable<T>) {
     super(sortedSource)
@@ -100,7 +110,7 @@ export class SortedArrayTransform<T> extends ArrayTransform<T> {
     keySelector: Selector<T, TKey>,
     direction: SortDirection = 'asc',
     comparer?: Comparer<TKey>
-  ): SortedArrayTransform<T> {
-    return new SortedArrayTransform(thenSort(this.sortedSource, keySelector, direction, comparer))
+  ): SortedIterableTransform<T> {
+    return new SortedIterableTransform(thenSort(this.sortedSource, keySelector, direction, comparer))
   }
 }
