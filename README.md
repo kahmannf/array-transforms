@@ -163,7 +163,7 @@ function reduce<T, U>(source: Iterable<T>, reducer: (pv: U, cv: T) => U, initial
 ```
 
 ### reverse
-Returns an iterable with aöö items in reversed order.
+Returns an iterable with all items in reversed order.
 ```typescript
 function reverse<T>(source: Iterable<T>): Iterable<T>
 ```
