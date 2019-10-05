@@ -1,4 +1,4 @@
-export function reduce<T>(source: Iterable<T>, reducer: (pv: T, cv: T, initialValue?: T) => T): T;
+export function reduce<T>(source: Iterable<T>, reducer: (pv: T, cv: T) => T, initialValue?: T): T;
 export function reduce<T, U>(source: Iterable<T>, reducer: (pv: U, cv: T) => U, initialValue: U): U
 export function reduce<T, U>(source: Iterable<T>, reducer: (pv: T|U, cv: T) => T|U, initialValue?: U): T|U {
   const iterator = source[Symbol.iterator]()
