@@ -11,7 +11,7 @@ export function* skip<T>(source: Iterable<T>, amount: number): Iterable<T> {
   while(!(remaining = iterator.next()).done) yield remaining.value
 }
 
-export function* skipWhile<T>(source: Iterable<T>, predicate: Predicate<T>) {
+export function* skipWhile<T>(source: Iterable<T>, predicate: Predicate<T>): Iterable<T> {
   const iterator = source[Symbol.iterator]()
   
   let item: IteratorResult<T>
