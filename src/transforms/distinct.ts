@@ -1,8 +1,8 @@
 import { Selector } from "../types";
 
 export function distinct<T>(source: Iterable<T>): Iterable<T>
-export function distinct<T, U>(source: Iterable<T>, selector: Selector<T, U>): Iterable<U>
-export function* distinct<T, U>(source: Iterable<T>, selector?: Selector<T, T|U>): Iterable<T|U> {
+export function distinct<T, U>(source: Iterable<T>, selector: Selector<T, U>): Iterable<T>
+export function* distinct<T, U>(source: Iterable<T>, selector?: Selector<T, U>): Iterable<T> {
   const select = selector ? selector : ((x: T) => x)
   const set = new Set<T|U>()
 
