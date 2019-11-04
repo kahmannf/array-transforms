@@ -39,12 +39,8 @@ export class IterableTransform<T> implements Iterable<T> {
     return count(this.source, predicate)
   }
 
-  distinct(): IterableTransform<T>;
-  distinct<U>(selector: Selector<T, U>): IterableTransform<U>;
-  distinct<U>(selector?: Selector<T, U>): IterableTransform<T|U>  {
-    return selector
-    ? new IterableTransform(distinct(this.source, selector))
-    : new IterableTransform(distinct(this.source))
+  distinct(selector?: Selector<T, any>): IterableTransform<T>  {
+    return new IterableTransform(distinct(this.source, selector))
   }
 
   filter(predicate: Predicate<T>): IterableTransform<T> {
