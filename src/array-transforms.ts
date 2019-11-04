@@ -109,6 +109,10 @@ export class IterableTransform<T> implements Iterable<T> {
       for(const item of _this.source) yield item
     }();
   }
+
+  toArray(): T[] {
+    return Array.from(this[Symbol.iterator]())
+  }
 }
 
 export class SortedIterableTransform<T> extends IterableTransform<T> {
